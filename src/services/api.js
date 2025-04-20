@@ -44,8 +44,29 @@ export const connectInstagram = async (credentials) => {
 };
 
 // --- Other potential API calls ---
-// getAgent(agentId)
-// updateAgentPersona(agentId, personaData)
+
+// Añadimos la función para obtener la persona (simulada)
+export const getAgentPersona = async (agentId) => {
+  console.log('API Call: getAgentPersona', agentId);
+  // Simular respuesta con datos de persona
+  return fakeApiCall({
+    success: true,
+    name: `Agente ${agentId} Placeholder`,
+    role: 'Rol placeholder cargado de API',
+    language: 'es',
+    tone: 'Amable',
+    style: 'Claro y conciso',
+    guidelines: 'Directrices cargadas de API.'
+  });
+};
+
+// Añadimos la función para actualizar la persona (simulada)
+export const updateAgentPersona = async (agentId, personaData) => {
+  console.log('API Call: updateAgentPersona', agentId, personaData);
+  // Simular respuesta de éxito
+  return fakeApiCall({ success: true });
+};
+
 // publishAgent(agentId)
 // getAgentList()
 // etc. 
