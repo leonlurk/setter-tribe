@@ -67,6 +67,25 @@ export const updateAgentPersona = async (agentId, personaData) => {
   return fakeApiCall({ success: true });
 };
 
+// Añadimos la función para obtener info de publicación (simulada)
+export const getAgentPublishInfo = async (agentId) => {
+  console.log('API Call: getAgentPublishInfo', agentId);
+  // Simular estado de publicación, canales conectados, etc.
+  return fakeApiCall({
+    success: true,
+    status: 'draft', // o 'published'
+    connectedChannels: ['whatsapp'], // Ejemplo
+    lastPublished: null // O una fecha
+  });
+};
+
+// Añadimos la función para publicar (simulada)
+export const publishAgent = async (agentId) => {
+  console.log('API Call: publishAgent', agentId);
+  // Simular la acción de publicar
+  return fakeApiCall({ success: true, status: 'published', lastPublished: new Date().toISOString() });
+};
+
 // publishAgent(agentId)
 // getAgentList()
 // etc. 
