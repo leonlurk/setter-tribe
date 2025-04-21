@@ -16,7 +16,7 @@ const ChartBarIcon = (props) => (
 
 const Cog6ToothIcon = (props) => (
  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.646.87.333.184.726.217 1.08.092l1.26-.365c.513-.148.975.342.792.816l-1.26 2.203c-.253.44-.686.756-1.175.82l-1.37.098c-.41.03-.786.217-1.05.49l-1.07 1.07c-.318.317-.744.497-1.18.497s-.862-.18-1.18-.497l-1.07-1.07c-.263-.274-.64-.46-.1.05-.49l-1.37-.098c-.49-.064-.922-.38-1.175-.82l-1.26-2.203c-.183-.474.279-.964.792-.816l1.26.365c.354.125.747.092 1.08-.092.333-.184.582-.496.646-.87l.213-1.281zM12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zM3 15.75a3 3 0 013-3h12a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V15.75z" />
+  <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.646.87.333.184.726.217 1.08.092l1.26-.365c.513-.148.975.342.792.816l-1.26 2.203c-.253.44-.686.756-1.175.82l-1.37.098c-.41.03-.786.217-1.05.49l-1.07 1.07c-.318.317-.744.497-1.18.497s-.862-.18-1.18-.497l-1.07-1.07c-.263-.274-.64-.46-1.05-.49l-1.37-.098c-.49-.064-.922-.38-1.175-.82l-1.26-2.203c-.183-.474.279-.964.792-.816l1.26.365c.354.125.747.092 1.08-.092.333-.184.582-.496.646-.87l.213-1.281zM12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zM3 15.75a3 3 0 013-3h12a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V15.75z" />
 </svg>
 );
 
@@ -30,6 +30,20 @@ const MoonIcon = (props) => (
  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
   <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
 </svg>
+);
+
+// Icono para Automatización
+const WrenchScrewdriverIcon = (props) => (
+ <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.145l-5.457 5.457a3.003 3.003 0 00-4.242-4.242l-4.283 5.109a3.375 3.375 0 00-.942 2.586l-.008.008A3.375 3.375 0 005.378 21l.008.007a3.375 3.375 0 002.586-.942l5.108-4.283a3.001 3.001 0 004.242-4.242Z" />
+</svg>
+);
+
+// Icono para Logs y Acciones
+const ChatBubbleLeftRightIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3.1-3.102a11.25 11.25 0 01-5.176 0l-3.1 3.102v-3.091c-.34-.02-.68-.045-1.02-.072-1.133-.093-1.98-1.057-1.98-2.193V10.608c0-.97.616-1.813 1.5-2.097M15.75 6.75v-1.5c0-1.5-1.5-2.25-3.75-2.25S8.25 3.75 8.25 5.25v1.5m7.5 0v4.5m-7.5-4.5v4.5m7.5 0H8.25m7.5 0h1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125h-9.75c-.621 0-1.125-.504-1.125-1.125v-1.5c0-.621.504-1.125 1.125-1.125H8.25" />
+  </svg>
 );
 
 const NavLink = ({ to, Icon, label }) => {
@@ -72,8 +86,9 @@ function Sidebar() {
           {/* Mantener las mismas secciones que definimos antes */}
           <NavLink to="/agents" Icon={RectangleStackIcon} label="Agentes" />
           <NavLink to="/analytics" Icon={ChartBarIcon} label="Analíticas" />
-          {/* Puedes añadir más aquí si quieres, ejemplo: */}
-          {/* <NavLink to="/templates" Icon={TemplateIcon} label="Plantillas" /> */}
+          {/* Añadir enlaces a nuevas páginas */}
+          <NavLink to="/automation-rules" Icon={WrenchScrewdriverIcon} label="Automatización" />
+          <NavLink to="/messages-log" Icon={ChatBubbleLeftRightIcon} label="Logs y Acciones" />
       </nav>
 
       {/* Bottom Section */}

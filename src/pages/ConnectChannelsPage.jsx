@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Input from '../components/Input';
+// Importar la función real de la API
+import { getWhatsAppStatus } from '../services/api';
 // Importar iconos específicos para WhatsApp, Instagram, Web
 
 // Iconos Placeholder (Idealmente importar SVGs específicos)
@@ -11,6 +13,46 @@ const GlobeAltIcon = () => <span className="text-2xl">🌐</span>;
 
 function ConnectChannelsPage() {
   const [isConnecting, setIsConnecting] = useState(null); // 'whatsapp', 'instagram', 'web'
+  // Estado para WhatsApp
+  const [whatsAppStatus, setWhatsAppStatus] = useState({ qrCodeUrl: null, clientReady: false, message: null, success: true });
+  const [isLoadingWhatsApp, setIsLoadingWhatsApp] = useState(true);
+
+  // useEffect para obtener el estado de WhatsApp periódicamente
+  useEffect(() => {
+    let intervalId = null;
+
+    const fetchStatus = async () => {
+      // No mostrar carga en actualizaciones periódicas, solo la inicial
+      // setIsLoadingWhatsApp(true); // Opcional: mostrar carga en cada fetch
+      try {
+        const status = await getWhatsAppStatus();
+        setWhatsAppStatus(status);
+        // Si ya está conectado, podemos dejar de preguntar tan seguido
+        if (status.clientReady) {
+            if (intervalId) clearInterval(intervalId);
+            // Opcional: seguir preguntando menos frecuentemente por si se desconecta
+            // intervalId = setInterval(fetchStatus, 30000); // Cada 30 segundos
+        }
+      } catch (error) {
+        // El error ya se maneja en getWhatsAppStatus, que devuelve success:false
+        console.error("Error en fetchStatus:", error);
+        // Podríamos establecer un estado de error aquí si fuera necesario
+      } finally {
+          setIsLoadingWhatsApp(false); // Quitar carga después del primer fetch
+      }
+    };
+
+    // Primera llamada inmediata
+    fetchStatus();
+
+    // Iniciar intervalo para refrescar (especialmente para el QR)
+    intervalId = setInterval(fetchStatus, 5000); // Cada 5 segundos
+
+    // Limpiar intervalo al desmontar el componente
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []); // El array vacío asegura que se ejecuta solo al montar y desmontar
 
   // Simular conexión
   const handleConnect = async (channel) => {
@@ -33,23 +75,29 @@ function ConnectChannelsPage() {
            <WhatsAppIcon />
            <div className="flex-1">
              <h3 className="text-lg font-medium text-text-main">WhatsApp</h3>
-             <p className="text-sm text-text-muted mt-1 mb-4">Conecta tu número de WhatsApp Business API o genera un enlace directo wa.me para compartir.</p>
-             {/* Aquí mostrarías estado de conexión o formulario */}
-             <div className="space-y-4">
-               <p className="text-sm font-medium text-text-muted">Opción 1: WhatsApp Business API (Recomendado)</p>
-               {/* Formulario API Key / Número etc. */}
-               <Button
-                   onClick={() => handleConnect('WhatsApp API')}
-                   disabled={isConnecting === 'WhatsApp API'}
-                   className="w-full sm:w-auto"
-               >
-                   {isConnecting === 'WhatsApp API' ? 'Conectando...' : 'Conectar API'}
-               </Button>
-               <p className="text-sm font-medium text-text-muted pt-4">Opción 2: Enlace Directo wa.me</p>
-               <div className="flex items-center space-x-2">
-                   <Input id="wa-link-phone" placeholder="Número con código país (ej: +34...)" className="flex-1"/>
-                   <Button variant="secondary" className="shrink-0">Generar Enlace</Button>
-               </div>
+             <p className="text-sm text-text-muted mt-1 mb-4">
+                 Conecta tu número escaneando el código QR con la app WhatsApp en tu teléfono.
+             </p>
+             {/* Mostrar estado de conexión real */}
+             <div className="p-4 border border-border-main rounded-md min-h-[150px] flex flex-col justify-center items-center">
+                {isLoadingWhatsApp ? (
+                    <p className="text-text-muted">Cargando estado de WhatsApp...</p>
+                ) : !whatsAppStatus.success ? (
+                    <p className="text-red-500">Error: {whatsAppStatus.message || 'No se pudo obtener el estado.'}</p>
+                ) : whatsAppStatus.clientReady ? (
+                    <div className="text-center">
+                        <p className="text-lg font-semibold text-green-600">WhatsApp Conectado</p>
+                        <p className="text-sm text-text-muted">Tu agente está listo para recibir y enviar mensajes.</p>
+                    </div>
+                ) : whatsAppStatus.qrCodeUrl ? (
+                    <div className="text-center">
+                        <p className="text-text-main mb-2">Escanea este código QR desde WhatsApp:</p>
+                        <img src={whatsAppStatus.qrCodeUrl} alt="Código QR de WhatsApp" className="mx-auto border border-border-main p-1" />
+                        <p className="text-xs text-text-muted mt-2">Ve a WhatsApp &gt; Dispositivos Vinculados &gt; Vincular un dispositivo.</p>
+                    </div>
+                ) : (
+                    <p className="text-text-muted">WhatsApp desconectado. Esperando código QR o reconexión...</p>
+                )}
              </div>
            </div>
          </div>

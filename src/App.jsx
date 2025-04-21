@@ -10,6 +10,8 @@ import AgentListPage from './pages/AgentListPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import AutomationRulesPage from './pages/AutomationRulesPage';
+import MessagesLogPage from './pages/MessagesLogPage';
 
 // --- Páginas de Creación ---
 import CreateAgentLandingPage from './pages/CreateAgentPage'; // Renombramos para claridad
@@ -44,6 +46,8 @@ function App() {
            {/* ---- */}
            <Route path="/analytics" element={<AnalyticsPage />} />
            <Route path="/settings" element={<ProfileSettingsPage />} />
+           <Route path="/automation-rules" element={<AutomationRulesPage />} />
+           <Route path="/messages-log" element={<MessagesLogPage />} />
 
            {/* Rutas de Detalle de Agente (Anidadas) */}
            <Route path="/agents/:agentId" element={<AgentDetailPage />}>
